@@ -115,31 +115,35 @@ def write_to_excel(df, path, month, mode):
                            weekFour, weekFive, weekSix], columns = daysOfTheWeek)
     with pd.ExcelWriter(path=path, engine='openpyxl', mode=mode) as writer: 
         df.to_excel(writer, sheet_name=month, index = False)
-  
-write_to_excel(calendar_month(DaysInMonth.JANUARY), 
-               str(selectedYear) + '_Calendar.xlsx', 'January', 'w')
-write_to_excel(calendar_month(DaysInMonth.FEBRUARY), 
-               str(selectedYear) + '_Calendar.xlsx', 'February', 'a')
-write_to_excel(calendar_month(DaysInMonth.MARCH), 
-               str(selectedYear) + '_Calendar.xlsx', 'March', 'a')
-write_to_excel(calendar_month(DaysInMonth.APRIL), 
-               str(selectedYear) + '_Calendar.xlsx', 'April', 'a')
-write_to_excel(calendar_month(DaysInMonth.MAY), 
-               str(selectedYear) + '_Calendar.xlsx', 'May', 'a')
-write_to_excel(calendar_month(DaysInMonth.JUNE), 
-               str(selectedYear) + '_Calendar.xlsx', 'June', 'a')
-write_to_excel(calendar_month(DaysInMonth.JULY), 
-               str(selectedYear) + '_Calendar.xlsx', 'July', 'a')
-write_to_excel(calendar_month(DaysInMonth.AUGUST), 
-               str(selectedYear) + '_Calendar.xlsx', 'August', 'a')
-write_to_excel(calendar_month(DaysInMonth.SEPTEMBER), 
-               str(selectedYear) + '_Calendar.xlsx', 'September', 'a')
-write_to_excel(calendar_month(DaysInMonth.OCTOBER), 
-               str(selectedYear) + '_Calendar.xlsx', 'October', 'a')
-write_to_excel(calendar_month(DaysInMonth.NOVEMBER), 
-               str(selectedYear) + '_Calendar.xlsx', 'November', 'a')
-write_to_excel(calendar_month(DaysInMonth.DECEMBER), 
-               str(selectedYear) + '_Calendar.xlsx', 'December', 'a')
+
+def main():
+    write_to_excel(calendar_month(DaysInMonth.JANUARY), 
+                   str(selectedYear) + '_Calendar.xlsx', 'January', 'w')
+    write_to_excel(calendar_month(DaysInMonth.FEBRUARY), 
+                   str(selectedYear) + '_Calendar.xlsx', 'February', 'a')
+    write_to_excel(calendar_month(DaysInMonth.MARCH), 
+                   str(selectedYear) + '_Calendar.xlsx', 'March', 'a')
+    write_to_excel(calendar_month(DaysInMonth.APRIL), 
+                   str(selectedYear) + '_Calendar.xlsx', 'April', 'a')
+    write_to_excel(calendar_month(DaysInMonth.MAY), 
+                   str(selectedYear) + '_Calendar.xlsx', 'May', 'a')
+    write_to_excel(calendar_month(DaysInMonth.JUNE), 
+                   str(selectedYear) + '_Calendar.xlsx', 'June', 'a')
+    write_to_excel(calendar_month(DaysInMonth.JULY), 
+                   str(selectedYear) + '_Calendar.xlsx', 'July', 'a')
+    write_to_excel(calendar_month(DaysInMonth.AUGUST), 
+                   str(selectedYear) + '_Calendar.xlsx', 'August', 'a')
+    write_to_excel(calendar_month(DaysInMonth.SEPTEMBER), 
+                   str(selectedYear) + '_Calendar.xlsx', 'September', 'a')
+    write_to_excel(calendar_month(DaysInMonth.OCTOBER), 
+                   str(selectedYear) + '_Calendar.xlsx', 'October', 'a')
+    write_to_excel(calendar_month(DaysInMonth.NOVEMBER), 
+                   str(selectedYear) + '_Calendar.xlsx', 'November', 'a')
+    write_to_excel(calendar_month(DaysInMonth.DECEMBER), 
+                   str(selectedYear) + '_Calendar.xlsx', 'December', 'a')
+
+if __name__ == "__main__":
+    main()
 
 
 
