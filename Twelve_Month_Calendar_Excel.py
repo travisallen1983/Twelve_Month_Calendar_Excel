@@ -17,28 +17,49 @@ class DaysInMonth():
     OCTOBER = ["October", 31]
     NOVEMBER = ["November", 30]
     DECEMBER = ["December", 31]
-    
-yearStartDayOfTheWeek =[0,'']
 
+# Initialize yearStartDayOfTheWeek variable.
+# It will contain start year at index 0 and the starting day of the week at index 1    
+yearStartDayOfTheWeek =[0,""]
+leapYear = ""
+# List of all days of the week for Sunday to Saturday calendar view.
 daysOfTheWeek = ["Sunday", "Monday", "Tuesday", 
                  "Wednesday", "Thursday", "Friday", "Saturday"]
 
 startYear = 1776
-selectedYear = int(input("Select a calendar year from 1776 on: "))
+selectedYear = 0
+stop = "N"
+# Adding error handling for user input. 
+# The input should be an integer that is 4 characters long and greater than or equal to 1776.
+while stop == "N":
+    try: 
+        selectedYear = int(input("Select a calendar year from 1776 on: "))
+        if selectedYear >= 1776 and len(str(selectedYear)) == 4:
+            stop = "Y"
+        else:
+            stop = "N"
+    except ValueError:
+        stop = "N"
 
-# Start year is 1776. The first weekday was a Monday or daysOfTheWeek[1]
+# Start year is 1776. The first weekday was a Monday(daysOfTheWeek[1])
 dayOfTheWeekCount = 1
 for year in range(startYear, selectedYear + 1):
     yearStartDayOfTheWeek[0] = year
     yearStartDayOfTheWeek[1] = daysOfTheWeek[dayOfTheWeekCount]
+    # Leap year check. A leap add an additional day to the next years start date.
     if year % 4 == 0 and (year % 100 != 0 or (year % 100 == 0 and year % 400 == 0)):
+        leapYear = "Y"
+        # Accounting for the additional day added by the leap year
+        # along with the roll over of the dayOfTheWeekCount counter. 
         if dayOfTheWeekCount <= 4:
             dayOfTheWeekCount = dayOfTheWeekCount + 2
         elif dayOfTheWeekCount == 5:
             dayOfTheWeekCount = 0
+        # elif used in place of else for added clarity of the logic.
         elif dayOfTheWeekCount == 6:
             dayOfTheWeekCount = 1
     else:
+        leapYear = "N"
         dayOfTheWeekCount = dayOfTheWeekCount + 1
         if dayOfTheWeekCount > 6:
             dayOfTheWeekCount = 0
@@ -50,11 +71,7 @@ sevenDayCheck = 0
 if selectedDay in daysOfTheWeek:
     sevenDayCheck = daysOfTheWeek.index(selectedDay)
 
-if selectedYear % 4 == 0 and (selectedYear % 100 != 0 or (selectedYear % 100 == 0 and selectedYear % 400 == 0)):
-    leapYear = "Y"
-else:
-    leapYear = "N"
-  
+# Initilizing lists to add dates by index position, instead of appending to empty lists.
 weekOne=['','','','','','',''] 
 weekTwo=['','','','','','',''] 
 weekThree=['','','','','','',''] 
@@ -73,12 +90,14 @@ def calendar_month(month):
     global leapYear
     global monthLength
     global monthLengthCheck
-        
+    
+    # Increase the February date range if it is a leap year.
     if month[0] == "February" and leapYear == "Y":
         monthLength = month[1] + 1
     else:
         monthLength = month[1]
-            
+    
+    # iterate over the lists inside the weeksInMonth list.    
     for i in range(0,6):
         if i > 0:
             if sevenDayCheck <= 6 and monthLength < monthLengthCheck:
@@ -87,7 +106,7 @@ def calendar_month(month):
                 sevenDayCheck = sevenDayCheck + 1
             else:
                 sevenDayCheck = 0
-
+        # Check which days of the week belong in the week list and their position in the list. 
         for j in range(0,7):
             if monthLength < monthLengthCheck:
                 weeksInMonth[i][j] = ""
