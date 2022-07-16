@@ -18,27 +18,39 @@ class DaysInMonth():
     NOVEMBER = ["November", 30]
     DECEMBER = ["December", 31]
     
-yearStartDayOfTheWeek =[[2021, "Friday"], [2022,"Saturday"], 
-                        [2023, "Sunday"], [2024, "Monday"]]
+yearStartDayOfTheWeek =[0,'']
+
 daysOfTheWeek = ["Sunday", "Monday", "Tuesday", 
                  "Wednesday", "Thursday", "Friday", "Saturday"]
 
+startYear = 1776
+selectedYear = int(input("Select a calendar year from 1776 on: "))
 
-selectedYear = int(input("Select a calendar year from 2021 to 2024: "))
-
-selectedDay = ""
-for i in range(len(yearStartDayOfTheWeek)):
-    if yearStartDayOfTheWeek[i][0] == selectedYear:    
-        selectedDay = yearStartDayOfTheWeek[i][1]
+# Start year is 1776. The first weekday was a Monday or daysOfTheWeek[1]
+dayOfTheWeekCount = 1
+for year in range(startYear, selectedYear + 1):
+    yearStartDayOfTheWeek[0] = year
+    yearStartDayOfTheWeek[1] = daysOfTheWeek[dayOfTheWeekCount]
+    if year % 4 == 0 and (year % 100 != 0 or (year % 100 == 0 and year % 400 == 0)):
+        if dayOfTheWeekCount <= 4:
+            dayOfTheWeekCount = dayOfTheWeekCount + 2
+        elif dayOfTheWeekCount == 5:
+            dayOfTheWeekCount = 0
+        elif dayOfTheWeekCount == 6:
+            dayOfTheWeekCount = 1
     else:
-        selectedDay = selectedDay   
+        dayOfTheWeekCount = dayOfTheWeekCount + 1
+        if dayOfTheWeekCount > 6:
+            dayOfTheWeekCount = 0
+
+selectedDay = yearStartDayOfTheWeek[1]   
 selectedDay = selectedDay.capitalize()
 
 sevenDayCheck = 0
 if selectedDay in daysOfTheWeek:
     sevenDayCheck = daysOfTheWeek.index(selectedDay)
 
-if selectedYear % 4 == 0 and selectedYear % 100 != 0 and selectedYear % 400 != 0:
+if selectedYear % 4 == 0 and (selectedYear % 100 != 0 or (selectedYear % 100 == 0 and selectedYear % 400 == 0)):
     leapYear = "Y"
 else:
     leapYear = "N"
