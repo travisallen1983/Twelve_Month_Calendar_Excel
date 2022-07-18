@@ -60,9 +60,11 @@ frame.mainloop()
 After destroying the GUI, use the input to create the calendar.
 
 '''
-
+currentYear = date.today()
+currentYear = currentYear.strftime("%Y")
 date = date.today()
 date = date.strftime("%B_%d_%Y")
+
 
 class DaysInMonth():
     JANUARY = ["January", 31]
@@ -85,18 +87,18 @@ leapYear = ""
 # List of all days of the week for Sunday to Saturday calendar view.
 daysOfTheWeek = ["Sunday", "Monday", "Tuesday", 
                  "Wednesday", "Thursday", "Friday", "Saturday"]
-selectedYear = int(selectedYear)
+
 startYear = 1776
 
 # Adding error handling for user input. 
 # The input should be an integer that is 4 characters long and greater than or equal to 1776.
 try: 
-    if selectedYear >= 1776 and len(str(selectedYear)) == 4:
-        selectedYear = selectedYear
+    if int(selectedYear) >= 1776 and len(str(selectedYear)) == 4:
+        selectedYear = int(selectedYear)
     else:
-        selectedYear = int(date.strftime("%Y"))
+        selectedYear = int(currentYear)
 except ValueError:
-    selectedYear = int(date.strftime("%Y"))
+    selectedYear = int(currentYear)
 
 # Start year is 1776. The first weekday was a Monday(daysOfTheWeek[1])
 dayOfTheWeekCount = 1
